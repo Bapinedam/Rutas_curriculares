@@ -1,0 +1,1 @@
+La idea es recrear un proyecto que realicé para una universidad en Colombia. El propósito del proyecto fue descubrir si, posterior a una reforma curricular que resolvía hacer un currículo flexible para el total de programas universitarios, los estudiantes segían rutas particulares que permitieran definir perfiles de psicólogos egresados.

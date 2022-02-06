@@ -1,0 +1,42 @@
+---
+title: "En desarrollo"
+author: "Brayam Pineda"
+output: html_document
+---
+
+La idea es recrear un proyecto que realicé para una universidad en Colombia. El propósito del proyecto fue descubrir si, posterior a una reforma curricular que resolvía hacer un currículo flexible para el total de programas universitarios, los estudiantes segían rutas particulares que permitieran definir perfiles de psicólogos egresados.
+
+Para esto se construyó un dataframe producto de uniones de varias tablas. Lastimosamente la limpieza y depuración de los datos no puede ser compartida en tanto se mostraría información confidencial. En este sentido, la data de la que partiremos será la siguiente
+
+## Librerías
+
+```{r, warning=FALSE, message=FALSE, results='hide'}
+library(readxl)
+library(dplyr)
+library(ggplot2)
+library(kableExtra)
+library(DT)
+```
+
+## Data
+
+```{r}
+data = read.csv("data.csv")
+head(data)[,1:5] %>%
+  kbl() %>%
+  kable_paper("hover", 
+              full_width = F)
+```
+
+Eliminaremos la columna de NUeva_tipologia y traeremos la columna _index_ al principio para que sea más facil entender la tabla
+
+```{r}
+data = select(data, -"Nueva_tipologia")
+data = data[, c(1,94, 2:93)]
+head(data)[,1:5] %>%
+  kbl() %>%
+  kable_paper("hover", 
+              full_width = F)
+```
+
+La data contiene entonces, el nombre de la práctica profesional que escogió cada uno de los estudiantes. Seguido del índice que identifica a cada uno de los estudiantes. Respecto al último, es posible encontrar el mismo índice en varias prácticas, esto es debido a que las prácticas profesionales son tomadas durante dos semestres, y es posible que un sujeto escoja una distinta en cada uno. Las siguientes 92 columnas corresponden a cada una de las asignaturas optativas que tomaron los estudiantes de psicología, uno (1) si el estudiante la tomó y cero (0) en caso contrario.
